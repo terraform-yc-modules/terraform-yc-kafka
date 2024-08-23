@@ -3,7 +3,8 @@
 ## Features
 
 - Create a Managed Kafka cluster with predefined number of DB hosts
-- Create a list of users and databases with permissions
+- Create a list of users and topics with permissions
+- Create a Connetors
 - Easy to use in other resources via outputs
 
 ## Kafka cluster definition
@@ -14,12 +15,9 @@ Kafka module requires a following input variables:
  - VPC network id
  - VPC network subnets ids
  - Zones and brokers count
- - Topics
- - Users - a list users with a list of grants to topics
- - Connectors - MirrorMaker and S3 silk.
 
 <b>Notes:</b>
-1. `users` variable defines a list of separate db users with a `permissions` list, which indicates to a list of topics and grants for each of them.
+1. `users` variable defines a list of separate users with a `permissions` list, which indicates to a list of topics and grants for each of them.
 
 ### Example
 
@@ -97,5 +95,13 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_cluster_host_names_list"></a> [cluster\_host\_names\_list](#output\_cluster\_host\_names\_list) | Kafka cluster host name |
+| <a name="output_cluster_id"></a> [cluster\_id](#output\_cluster\_id) | Kafka cluster ID |
+| <a name="output_cluster_name"></a> [cluster\_name](#output\_cluster\_name) | Kafka cluster name |
+| <a name="output_connection_step_1"></a> [connection\_step\_1](#output\_connection\_step\_1) | 1 step - Install certificate |
+| <a name="output_connection_step_2"></a> [connection\_step\_2](#output\_connection\_step\_2) | How connect to Kafka cluster?<br><br>    1. Run connection string from the output value, for example<br><br>      kafkacat -C \<br>         -b <FQDN\_брокера>:9091 \<br>         -t <имя\_топика> \<br>         -X security.protocol=SASL\_SSL \<br>         -X sasl.mechanism=SCRAM-SHA-512 \<br>         -X sasl.username="<логин\_потребителя>" \<br>         -X sasl.password="<пароль\_потребителя>" \<br>         -X ssl.ca.location=/usr/local/share/ca-certificates/Yandex/YandexInternalRootCA.crt -Z -K: |
+| <a name="output_topics"></a> [topics](#output\_topics) | A list of topics names. |
+| <a name="output_users_data"></a> [users\_data](#output\_users\_data) | A list of users with passwords. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
