@@ -40,7 +40,7 @@ variable "subnet_ids" {
 variable "kafka_version" {
   description = "The Kafka version to use."
   type        = string
-  default     = "2.8"
+  default     = "3.5"
 }
 
 variable "brokers_count" {
@@ -105,7 +105,7 @@ variable "schema_registry" {
 variable "resource_preset_id" {
   description = "The resource preset ID."
   type        = string
-  default     = "s2.micro"
+  default     = "s3-c2-m8"
 }
 
 variable "disk_type_id" {
@@ -151,14 +151,14 @@ variable "zookeeper_config" {
   description = "The configuration for ZooKeeper nodes."
   type = object({
     resources = object({
-      resource_preset_id = optional(string, "s2.micro")
+      resource_preset_id = optional(string, "s3-c2-m8")
       disk_type_id       = optional(string, "network-ssd")
       disk_size          = optional(number, 32)
     })
   })
   default = {
     resources = {
-      resource_preset_id = "s2.micro"
+      resource_preset_id = "s3-c2-m8"
       disk_type_id       = "network-ssd"
       disk_size          = 30
     }

@@ -12,9 +12,10 @@ module "kafka" {
   connectors = []
   topics = [
     {
-      name               = "events"
-      partitions         = 2
-      replication_factor = 2
+      name                = "events"
+      partitions          = 1
+      replication_factor  = 3
+      min_insync_replicas = 2
     }
   ]
 
