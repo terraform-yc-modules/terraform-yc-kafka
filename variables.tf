@@ -177,8 +177,8 @@ variable "topics" {
   description = "A list of Kafka topics to create."
   type = list(object({
     name               = string
-    partitions         = optional(number, 1)
-    replication_factor = optional(number, 1)
+    partitions         = optional(number)
+    replication_factor = optional(number)
     topic_config = optional(object({
       cleanup_policy        = optional(string)
       compression_type      = optional(string)
@@ -219,47 +219,46 @@ variable "connectors" {
   description = "A list of Kafka connectors to create."
   type = list(object({
     name       = string
-    tasks_max  = optional(number, 1)
-    properties = optional(map(string), {})
+    tasks_max  = optional(number)
+    properties = optional(map(string))
     connector_config_mirrormaker = optional(object({
-      topics             = string
+      topics             = optional(string)
       replication_factor = optional(number)
-      source_cluster = object({
-        alias = string
-        external_cluster = object({
-          bootstrap_servers = string
-          sasl_username     = optional(string)
-          sasl_password     = optional(string)
-          sasl_mechanism    = optional(string)
-          security_protocol = optional(string)
-        })
-      })
-      target_cluster = object({
-        alias        = string
-        this_cluster = optional(object({}))
+      source_cluster = optional(object({
+        alias = optional(string)
         external_cluster = optional(object({
-          bootstrap_servers = string
+          bootstrap_servers = optional(string)
           sasl_username     = optional(string)
           sasl_password     = optional(string)
           sasl_mechanism    = optional(string)
           security_protocol = optional(string)
         }))
-      })
+      }))
+      target_cluster = optional(object({
+        alias        = optional(string)
+        this_cluster = optional(object({}))
+        external_cluster = optional(object({
+          bootstrap_servers = optional(string)
+          sasl_username     = optional(string)
+          sasl_password     = optional(string)
+          sasl_mechanism    = optional(string)
+          security_protocol = optional(string)
+        }))
+      }))
     }))
     connector_config_s3_sink = optional(object({
-      topics                = string
-      file_compression_type = string
-      file_max_records      = number
-      s3_connection = object({
-        bucket_name = string
-        external_s3 = object({
-          endpoint          = string
-          access_key_id     = string
-          secret_access_key = string
-        })
-      })
+      topics                = optional(string)
+      file_compression_type = optional(string)
+      file_max_records      = optional(number)
+      s3_connection = optional(object({
+        bucket_name = optional(string)
+        external_s3 = optional(object({
+          endpoint          = optional(string)
+          access_key_id     = optional(string)
+          secret_access_key = optional(string)
+        }))
+      }))
     }))
   }))
   default = []
-
 }
