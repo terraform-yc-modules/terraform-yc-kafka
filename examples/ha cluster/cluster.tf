@@ -2,6 +2,8 @@ module "kafka" {
   source = "../../"
 
   security_groups_ids_list = [yandex_vpc_security_group.db_sg.id, ]
+  name                     = "testy"
+  brokers_count            = 3
 
   network_id = yandex_vpc_network.vpc.id
   subnet_ids = [yandex_vpc_subnet.sub_a.id, yandex_vpc_subnet.sub_b.id, yandex_vpc_subnet.sub_d.id, ]

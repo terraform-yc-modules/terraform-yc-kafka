@@ -2,7 +2,6 @@
 variable "name" {
   description = "The name of the Kafka cluster."
   type        = string
-  default     = "kafka-cluster"
 }
 
 variable "folder_id" {
@@ -46,7 +45,6 @@ variable "kafka_version" {
 variable "brokers_count" {
   description = "The number of brokers."
   type        = number
-  default     = 1
 }
 
 variable "security_groups_ids_list" {
