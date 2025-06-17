@@ -52,7 +52,7 @@ resource "yandex_mdb_kafka_cluster" "this" {
       }
     }
     dynamic "zookeeper" {
-      for_each = var.brokers_count > 1 ? [1] : []
+      for_each = (var.brokers_count > 1 || length(var.zones) > 1) ? [1] : []
       content {
         resources {
           resource_preset_id = var.zookeeper_config.resources.resource_preset_id
