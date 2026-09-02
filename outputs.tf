@@ -9,8 +9,13 @@ output "cluster_name" {
 }
 
 output "cluster_host_names_list" {
-  description = "Kafka cluster host name"
+  description = "Deprecated legacy nested host-name list. Retained unchanged for compatibility; use cluster_host_names for a flat list."
   value       = [yandex_mdb_kafka_cluster.this.host[*].name]
+}
+
+output "cluster_host_names" {
+  description = "Flat list of Kafka cluster host names."
+  value       = yandex_mdb_kafka_cluster.this.host[*].name
 }
 
 output "users_data" {

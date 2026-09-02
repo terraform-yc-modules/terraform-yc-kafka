@@ -3,7 +3,8 @@ module "kafka" {
 
   security_groups_ids_list = [yandex_vpc_security_group.db_sg.id, ]
   name                     = "testy"
-  brokers_count            = 3
+  brokers_count            = 1
+  kafka_version            = "3.9"
 
   network_id = yandex_vpc_network.vpc.id
   subnet_ids = [yandex_vpc_subnet.sub_a.id, yandex_vpc_subnet.sub_b.id, yandex_vpc_subnet.sub_d.id, ]
@@ -14,10 +15,12 @@ module "kafka" {
   connectors = []
   topics = [
     {
-      name                = "events"
-      partitions          = 1
-      replication_factor  = 3
-      min_insync_replicas = 2
+      name               = "events"
+      partitions         = 1
+      replication_factor = 3
+      topic_config = {
+        min_insync_replicas = 2
+      }
     }
   ]
 

@@ -28,10 +28,9 @@ resource "yandex_vpc_security_group" "db_sg" {
 
   ingress {
     protocol       = "TCP"
-    description    = "incoming-kafka"
-    v4_cidr_blocks = ["0.0.0.0/0"]
-    from_port      = 0
-    to_port        = 65535
+    description    = "Kafka TLS from example VPC subnets"
+    port           = 9091
+    v4_cidr_blocks = ["10.1.0.0/24", "10.2.0.0/24", "10.3.0.0/24"]
   }
 
   egress {
