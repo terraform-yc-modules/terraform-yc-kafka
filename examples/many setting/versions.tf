@@ -2,6 +2,10 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
+    random = {
+      source  = "hashicorp/random"
+      version = ">= 3.6.2"
+    }
     yandex = {
       source  = "yandex-cloud/yandex"
       version = ">= 0.225.0"
