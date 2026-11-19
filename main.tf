@@ -38,18 +38,12 @@ resource "yandex_mdb_kafka_cluster" "this" {
       }
     }
 
-    dynamic "rest_api" {
-      for_each = var.rest_api_enabled ? [1] : []
-      content {
-        enabled = true
-      }
+    rest_api {
+      enabled = var.rest_api_enabled
     }
 
-    dynamic "kafka_ui" {
-      for_each = var.kafka_ui_enabled ? [1] : []
-      content {
-        enabled = true
-      }
+    kafka_ui {
+      enabled = var.kafka_ui_enabled
     }
 
     kafka {
